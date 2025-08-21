@@ -21,7 +21,7 @@ export async function signInService({ email, password }) {
 
 }
 
-export async function signUpService({ email, password, name , phone }) {
+export async function signUpService({ email, password, name , phone , imageUrl }) {
   const user = await findUserByEmail(email);
   if (user) {
     throw new Error(" Email already exists");
@@ -32,7 +32,8 @@ export async function signUpService({ email, password, name , phone }) {
     name,
     email,
     password: hashedPassword,
-    phone: phone
+    phone: phone,
+    imageUrl
   };
   const result=await createUser(newUser);
   if (!result) {
@@ -44,7 +45,8 @@ export async function signUpService({ email, password, name , phone }) {
       id: result.id,
       name: result.name,
       email: result.email,
-      phone: result.phone
+      phone: result.phone,
+      imageUrl:result.imageUrl
     }
   };
 }

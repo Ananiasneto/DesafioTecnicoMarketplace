@@ -7,7 +7,7 @@ const userRouter = Router();
 
 
 userRouter.post('/sign-in',validateSchema(signInSchema),signIn);
-userRouter.post('/sign-up',validateSchema(signUpSchema),signUp);
+userRouter.post('/sign-up',upload.single("image"),validateSchema(signUpSchema),signUp);
 
 
 export default userRouter;
