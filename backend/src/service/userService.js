@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { findUserByEmail } from "../repository/userRepository.js";
+import { createUser, findUserByEmail } from "../repository/userRepository.js";
 
 export async function signInService({ email, password }) {
   const user = await findUserByEmail(email);
@@ -19,4 +19,32 @@ export async function signInService({ email, password }) {
       token 
     };
 
+}
+
+export async function signUpService({ email, password, name , phone }) {
+  const user = await findUserByEmail(email);
+  if (user) {
+    throw new Error(" Email already exists");
+  }
+  const saltRounds = parseInt(process.env.BCRYPT_SALT_ROUNDS)
+  const hashedPassword =await bcrypt.hash(password, saltRounds);
+  const newUser = {
+    name,
+    email,
+    password: hashedPassword,
+    phone: phone
+  };
+  const result=await createUser(newUser);
+  if (!result) {
+    throw new Error("Failed to create user");
+  }
+  return {
+    message: "User created successfully",
+    user: {
+      id: result.id,
+      name: result.name,
+      email: result.email,
+      phone: result.phone
+    }
+  };
 }

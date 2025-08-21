@@ -5,3 +5,8 @@ export async function findUserByEmail(email) {
         where: { email },
     });
 }
+export async function createUser(userData) {
+    return await prisma.user.create({
+        data: userData
+    });
+}
