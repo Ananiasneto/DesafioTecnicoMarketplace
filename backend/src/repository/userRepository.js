@@ -10,3 +10,8 @@ export async function createUser(userData) {
         data: userData
     });
 }
+export async function findUserById(id) {
+    return await prisma.user.findUnique({
+        where: { id },
+    });
+}

@@ -23,7 +23,7 @@ export async function signUp(req, res) {
         if (error.message === 'Email already exists' || error.message === 'Failed to create user') {
             return res.status(401).json({ message: error.message });
         }
-        console.error('Error during sign-in:', error);
+        console.error('Error during sign-up:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }   
 }
