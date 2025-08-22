@@ -1,5 +1,5 @@
 import { checkCategoryExists, createCategory } from "../repository/categoryRepository.js";
-import { createProductRepository, getProductsByCategory } from "../repository/productRepository.js";
+import { createProductRepository, getProductsRepository} from "../repository/productRepository.js";
 import { findUserById } from "../repository/userRepository.js";
 
 export async function createProductService({ title, description, price, imageUrl, category,userId }) {
@@ -42,8 +42,8 @@ export async function createProductService({ title, description, price, imageUrl
         }
     };
 }
-export async function getProductsByCategoryService(category) {
-    const products = await getProductsByCategory(category);
+export async function getProductsService(category, status) {
+    const products = await getProductsRepository(category, status);
     if (!products || products.length === 0) {
         return [];
     }

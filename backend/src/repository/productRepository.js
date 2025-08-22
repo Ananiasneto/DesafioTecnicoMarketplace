@@ -5,15 +5,28 @@ export async function createProductRepository(productData) {
         data: productData
     });
 }
-export async function getProductsByCategory(categoryName) {
-  return await prisma.product.findMany({
-    where: {
-      category: {
-        name: categoryName
+export async function getProductsRepository(categoryName, status) {
+  const productFilter = {};
+
+  if (status && typeof status === 'string') {
+    productFilter.status = status.toLowerCase();
+  }
+
+  if (categoryName && typeof categoryName === 'string') {
+    const category = await prisma.category.findFirst({
+      where: {
+        name: { equals: categoryName, mode: "insensitive" }
       }
-    },
-    include: {
-      category: true,
+    });
+
+    if (!category) {
+      return [];
     }
+
+    productFilter.categoryId = category.id;
+  }
+  return await prisma.product.findMany({
+    where: productFilter,
+    include: { category: true },
   });
 }

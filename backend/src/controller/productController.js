@@ -1,5 +1,5 @@
 import { createProductService } from '../service/productService.js';
-import { getProductsByCategoryService } from '../service/productService.js';
+import { getProductsService } from '../service/productService.js';
 
 export async function createProduct(req, res) {
     const { title, description, price, category } = req.body;
@@ -14,10 +14,10 @@ export async function createProduct(req, res) {
     }   
 }
 
-export async function getProductsByCategory(req, res) {
-    const { category } = req.query;
+export async function getProducts(req, res) {
+    const { category ,status} = req.query;
     try {
-        const products = await getProductsByCategoryService(category);
+        const products = await getProductsService( category, status );
         return res.status(200).json(products);
     } catch (error) {
         console.error('Error during get products by category:', error);
