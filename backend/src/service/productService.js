@@ -1,5 +1,5 @@
 import { checkCategoryExists, createCategory } from "../repository/categoryRepository.js";
-import { createProductRepository, getProductsByIdRepository, getProductsRepository, patchProductStatusRepository} from "../repository/productRepository.js";
+import { createProductRepository, getProductsByIdRepository, getProductsRepository, patchProductRepository, patchProductStatusRepository} from "../repository/productRepository.js";
 import { findUserById } from "../repository/userRepository.js";
 
 export async function createProductService({ title, description, price, imageUrl, category,userId }) {
@@ -68,5 +68,26 @@ export async function getProductsByIdService(id) {
 }
 export async function patchProductStatusService(productId, status) {
     const updatedProduct = await patchProductStatusRepository(productId, status);
+    return updatedProduct;
+}
+
+export async function patchProductService(id, updates) {
+    const allowedFields = ["title", "description", "price", "status", "imageUrl"];
+    const updateData = {};
+
+  for (const key of Object.keys(updates)) {
+    if (allowedFields.includes(key)) {
+      updateData[key] = updates[key];
+    }
+  }
+
+  if (Object.keys(updateData).length === 0) {
+    throw new Error("No valid fields to update");
+  }
+    const updatedProduct = await patchProductRepository(id, updateData);
+    if (!updatedProduct) {
+        throw new Error("Failed to update product");
+    }
+    
     return updatedProduct;
 }

@@ -43,3 +43,9 @@ export async function patchProductStatusRepository(productId, status) {
     });
     return product;
 }
+export async function patchProductRepository(id, updateData) {
+  return await prisma.product.update({
+    where: { id: Number(id) },
+    data: updateData,
+  });
+}

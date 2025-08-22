@@ -1,4 +1,4 @@
-import { createProductService, getProductsByIdService, patchProductStatusService } from '../service/productService.js';
+import { createProductService, getProductsByIdService, patchProductService, patchProductStatusService } from '../service/productService.js';
 import { getProductsService } from '../service/productService.js';
 
 export async function createProduct(req, res) {
@@ -53,4 +53,16 @@ export async function patchProductStatus(req, res) {
         console.error('Error during pacht products status:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
+}
+export async function patchProduct(req, res) {
+  const { id } = req.params;
+  const updates = req.body;
+
+  try {
+    const updatedProduct = await patchProductService(id, updates);
+    return res.status(200).json(updatedProduct);
+  } catch (error) {
+    console.error("Erro ao atualizar produto:", error);
+    return res.status(500).json({ message: "Erro interno do servidor" });
+  }
 }

@@ -7,6 +7,13 @@ export const productSchema = Joi.object({
     imageUrl: Joi.string().optional(),
     category: Joi.string().required()
 });
+export const productUpdateSchema = Joi.object({
+    title: Joi.string().optional(),
+    description: Joi.string().optional(),
+    price: Joi.number().positive().optional(),
+    imageUrl: Joi.string().optional(),
+    status: Joi.string().optional()
+    })
 export const productUpdateStatusSchema = Joi.object({
     status: Joi.string().required()
 });
