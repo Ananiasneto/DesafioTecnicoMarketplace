@@ -1,4 +1,5 @@
 import { createProductService } from '../service/productService.js';
+import { getProductsByCategoryService } from '../service/productService.js';
 
 export async function createProduct(req, res) {
     const { title, description, price, category } = req.body;
@@ -11,4 +12,15 @@ export async function createProduct(req, res) {
         console.error('Error during create product:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }   
+}
+
+export async function getProductsByCategory(req, res) {
+    const { category } = req.query;
+    try {
+        const products = await getProductsByCategoryService(category);
+        return res.status(200).json(products);
+    } catch (error) {
+        console.error('Error during get products by category:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
 }

@@ -1,5 +1,5 @@
 import { checkCategoryExists, createCategory } from "../repository/categoryRepository.js";
-import { createProductRepository } from "../repository/productRepository.js";
+import { createProductRepository, getProductsByCategory } from "../repository/productRepository.js";
 import { findUserById } from "../repository/userRepository.js";
 
 export async function createProductService({ title, description, price, imageUrl, category,userId }) {
@@ -41,4 +41,19 @@ export async function createProductService({ title, description, price, imageUrl
             email: user.email
         }
     };
+}
+export async function getProductsByCategoryService(category) {
+    const products = await getProductsByCategory(category);
+    if (!products || products.length === 0) {
+        return [];
+    }
+    
+    return products.map(product => ({
+        id: product.id,
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        imageUrl: product.imageUrl,
+        status: product.status
+    }));
 }
