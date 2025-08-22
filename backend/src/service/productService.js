@@ -1,5 +1,5 @@
 import { checkCategoryExists, createCategory } from "../repository/categoryRepository.js";
-import { createProductRepository, getProductsByIdRepository, getProductsRepository} from "../repository/productRepository.js";
+import { createProductRepository, getProductsByIdRepository, getProductsRepository, patchProductStatusRepository} from "../repository/productRepository.js";
 import { findUserById } from "../repository/userRepository.js";
 
 export async function createProductService({ title, description, price, imageUrl, category,userId }) {
@@ -65,4 +65,8 @@ export async function getProductsByIdService(id) {
     }
     
     return product;
+}
+export async function patchProductStatusService(productId, status) {
+    const updatedProduct = await patchProductStatusRepository(productId, status);
+    return updatedProduct;
 }

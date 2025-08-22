@@ -1,4 +1,4 @@
-import { createProductService, getProductsByIdService } from '../service/productService.js';
+import { createProductService, getProductsByIdService, patchProductStatusService } from '../service/productService.js';
 import { getProductsService } from '../service/productService.js';
 
 export async function createProduct(req, res) {
@@ -35,6 +35,22 @@ export async function getProductsById(req, res) {
             return res.status(404).json({ message: error.message });
         }
         console.error('Error during get products by category:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+}
+export async function patchProductStatus(req, res) {
+    const {id} = req.params;
+    const {status} = req.body;
+    try {
+        const product = await getProductsByIdService(id);
+        const productStatusUpdate=await patchProductStatusService(product.id,status);
+
+        return res.status(200).json(productStatusUpdate);
+    } catch (error) {
+        if (error.message === "Product not found") {
+            return res.status(404).json({ message: error.message });
+        }
+        console.error('Error during pacht products status:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 }

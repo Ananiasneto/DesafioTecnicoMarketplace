@@ -7,3 +7,6 @@ export const productSchema = Joi.object({
     imageUrl: Joi.string().optional(),
     category: Joi.string().required()
 });
+export const productUpdateStatusSchema = Joi.object({
+    status: Joi.string().required()
+});

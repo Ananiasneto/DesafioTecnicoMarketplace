@@ -36,3 +36,10 @@ export async function getProductsByIdRepository(id) {
         include: { category: true }
     });
 }
+export async function patchProductStatusRepository(productId, status) {
+    const product = await prisma.product.update({
+        where: { id: productId },
+        data: { status }
+    });
+    return product;
+}
