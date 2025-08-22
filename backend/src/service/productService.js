@@ -1,5 +1,5 @@
 import { checkCategoryExists, createCategory } from "../repository/categoryRepository.js";
-import { createProductRepository, getProductsRepository} from "../repository/productRepository.js";
+import { createProductRepository, getProductsByIdRepository, getProductsRepository} from "../repository/productRepository.js";
 import { findUserById } from "../repository/userRepository.js";
 
 export async function createProductService({ title, description, price, imageUrl, category,userId }) {
@@ -42,6 +42,7 @@ export async function createProductService({ title, description, price, imageUrl
         }
     };
 }
+
 export async function getProductsService(category, status) {
     const products = await getProductsRepository(category, status);
     if (!products || products.length === 0) {
@@ -56,4 +57,12 @@ export async function getProductsService(category, status) {
         imageUrl: product.imageUrl,
         status: product.status
     }));
+}
+export async function getProductsByIdService(id) {
+    const product = await getProductsByIdRepository(id);
+    if (!product || product.length === 0) {
+        throw new Error("Product not found");
+    }
+    
+    return product;
 }

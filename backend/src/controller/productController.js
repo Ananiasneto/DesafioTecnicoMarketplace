@@ -1,4 +1,4 @@
-import { createProductService } from '../service/productService.js';
+import { createProductService, getProductsByIdService } from '../service/productService.js';
 import { getProductsService } from '../service/productService.js';
 
 export async function createProduct(req, res) {
@@ -20,6 +20,20 @@ export async function getProducts(req, res) {
         const products = await getProductsService( category, status );
         return res.status(200).json(products);
     } catch (error) {
+        console.error('Error during get products by category:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
+export async function getProductsById(req, res) {
+    const {id} = req.params;
+    try {
+        const product = await getProductsByIdService(id);
+        return res.status(200).json(product);
+    } catch (error) {
+        if (error.message === "Product not found") {
+            return res.status(404).json({ message: error.message });
+        }
         console.error('Error during get products by category:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }

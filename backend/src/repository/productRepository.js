@@ -30,3 +30,9 @@ export async function getProductsRepository(categoryName, status) {
     include: { category: true },
   });
 }
+export async function getProductsByIdRepository(id) {
+    return await prisma.product.findUnique({
+        where: { id: parseInt(id) },
+        include: { category: true }
+    });
+}

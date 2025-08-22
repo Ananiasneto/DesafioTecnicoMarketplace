@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createProduct, getProducts } from "../controller/productController.js";
+import { createProduct, getProducts, getProductsById } from "../controller/productController.js";
 import { validateSchema } from "../middleware/middlewareSchema.js"; 
 import { productSchema } from "../schema/productSchema.js";
 import { authUser } from "../middleware/middlewareAuth.js";
@@ -10,5 +10,6 @@ const productRouter = Router();
 
 productRouter.post('/create', authUser ,upload.single("image"),validateSchema(productSchema), createProduct);
 productRouter.get('/filter', authUser, getProducts);
+productRouter.get('/:id', authUser, getProductsById);
 
 export default productRouter;
