@@ -1,15 +1,13 @@
+import { BadRequestError, NotFoundError, uniprocessableEntityError } from "../error/erros.js";
 import { checkCategoryExists, createCategory } from "../repository/categoryRepository.js";
 import { createProductRepository, getProductsByIdRepository, getProductsRepository, patchProductRepository, patchProductStatusRepository} from "../repository/productRepository.js";
 import { findUserById } from "../repository/userRepository.js";
 
 export async function createProductService({ title, description, price, imageUrl, category,userId }) {
-
     let categoryExists = await checkCategoryExists(category);
     if (!categoryExists) {
          categoryExists=await createCategory(category);
     }
-
-
     const productData = {
         title,
         description,
@@ -22,7 +20,7 @@ export async function createProductService({ title, description, price, imageUrl
     
     const result = await createProductRepository(productData);
     if (!result) {
-        throw new Error("Failed to create product");
+        throw new BadRequestError("Failed to create product");
     }
     const user= await findUserById(userId);
     
@@ -61,7 +59,7 @@ export async function getProductsService(category, status) {
 export async function getProductsByIdService(id) {
     const product = await getProductsByIdRepository(id);
     if (!product || product.length === 0) {
-        throw new Error("Product not found");
+        throw new NotFoundError("Product not found");
     }
     
     return product;
@@ -82,12 +80,24 @@ export async function patchProductService(id, updates) {
   }
 
   if (Object.keys(updateData).length === 0) {
-    throw new Error("No valid fields to update");
+    throw uniprocessableEntityError("No valid fields to update");
   }
     const updatedProduct = await patchProductRepository(id, updateData);
     if (!updatedProduct) {
-        throw new Error("Failed to update product");
+        throw new BadRequestError("Failed to update product");
     }
     
     return updatedProduct;
+}
+export async function deleteProductService(id) {
+    const product = await getProductsByIdRepository(id);
+    if (!product) {
+        throw new NotFoundError("Product not found");
+    }
+    
+    const deletedProduct = await prisma.product.delete({
+        where: { id: parseInt(id) }
+    });
+    
+    return deletedProduct;
 }
