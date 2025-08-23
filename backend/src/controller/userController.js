@@ -1,6 +1,7 @@
 import { signInService,signUpService } from "../service/userService.js";
 
 export async function signIn(req, res, next) {
+    console.log(req.body, req.file)
     const { email, password } = req.body;
     try {
         const user = await signInService({ email, password });
