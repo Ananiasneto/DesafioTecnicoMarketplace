@@ -1,18 +1,26 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./page/Login";
 import Cadastro from "./page/Cadastro";
-
+import { createGlobalStyle } from "styled-components";
 
 function App() {
-
   return (
-   <BrowserRouter>
+    <BrowserRouter>
+      <GlobalStyle />
       <Routes>
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/Cadastro" element={<Cadastro />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
+
+const GlobalStyle = createGlobalStyle`
+  html, body, #root {
+    margin: 0;
+    padding: 0;
+    background-color: #fbf4f4;
+  }
+`;
 
 export default App;
