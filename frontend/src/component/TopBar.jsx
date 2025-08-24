@@ -9,6 +9,20 @@ export default function TopBar() {
   const [menuAberto, setMenuAberto] = useState(false);
   const navigate = useNavigate();
   const menuRef = useRef(null);
+  const timeoutRef = useRef(null);
+   const mouseEnter = () => {
+    timeoutRef.current = setTimeout(() => {
+      alert("Tá esperando o quê? Boraa moeer!! 🚀");
+    }, 7000);
+  };
+
+  const mouseLeave = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  };
+
 
   useEffect(() => {
     async function buscarUsuario() {
@@ -78,7 +92,8 @@ export default function TopBar() {
       </TextoCentral>
     
       <ImagemContainer ref={menuRef}>
-        <ButtonNewProduct onClick={() => navigate("/Products/insert")}>
+        <ButtonNewProduct  onMouseEnter={mouseEnter}
+      onMouseLeave={mouseLeave} onClick={() => navigate("/Products/insert")}>
           <PlusSignIcon  /> 
           Novo produto
         </ButtonNewProduct>
