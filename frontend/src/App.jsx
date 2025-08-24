@@ -3,6 +3,7 @@ import LoginPage from "./page/Login";
 import Cadastro from "./page/Cadastro";
 import { createGlobalStyle } from "styled-components";
 import Home from "./page/Home";
+import Products from "./page/Products";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/Cadastro" element={<Cadastro />} />
         <Route path="/Home" element={<Home />} />
+        <Route path="/Products" element={<Products />} />
       </Routes>
     </BrowserRouter>
   );

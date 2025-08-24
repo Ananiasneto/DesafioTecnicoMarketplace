@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ChartHistogramIcon, LogoutCircle01Icon, PackageIcon } from "hugeicons-react";
+import { ChartHistogramIcon, LogoutCircle01Icon, PackageIcon, PlusSignIcon } from "hugeicons-react";
 
 export default function TopBar() {
   const [usuario, setUsuario] = useState(null);
@@ -71,13 +71,17 @@ export default function TopBar() {
           Dashboard
         </ButtonDashbord>
         
-        <ButtonProduct onClick={() => navigate("/products")}>
+        <ButtonProduct onClick={() => navigate("/Products")}>
           <PackageIcon size={18} style={{ marginRight: '8px' }} />
           Produtos
         </ButtonProduct>
       </TextoCentral>
     
       <ImagemContainer ref={menuRef}>
+        <ButtonNewProduct onClick={() => navigate("/Products/insert")}>
+          <PlusSignIcon  /> 
+          Novo produto
+        </ButtonNewProduct>
         <ImagemPerfil 
           src={usuario?.imageUrl ? `${import.meta.env.VITE_API_URL}/uploads/${usuario.imageUrl}` : ''} 
           alt={usuario?.name}
@@ -137,6 +141,7 @@ const TextoCentral = styled.div`
 `;
 
 const ButtonBase = styled.button`
+font-family: 'Poppins', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -156,6 +161,22 @@ const ButtonBase = styled.button`
     background-color: #f5eaea;
   }
 `;
+
+const ButtonNewProduct=styled(ButtonBase)`
+display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 130px;
+  font-size: 13px;
+  color:white;
+  background-color: #f24d0d;
+  font-weight: 500;
+  cursor: pointer;
+  margin:0 10px 0 0;
+   &:hover {
+    background-color: #c43c08;
+    color:white;
+  }`;
 
 const ButtonDashbord = styled(ButtonBase)``;
 
