@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
-        <Route path="/Login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
         <Route path="/Cadastro" element={<Cadastro />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/Products" element={<Products />} />

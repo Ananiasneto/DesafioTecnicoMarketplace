@@ -29,7 +29,7 @@ export default function TopBar() {
       const token = localStorage.getItem("token");
       
       if (!token) {
-        navigate("/login");
+        navigate("/");
         return;
       }
 
@@ -44,7 +44,7 @@ export default function TopBar() {
       } catch (error) {
         console.error("Erro ao buscar usuário:", error);
         localStorage.removeItem("token");
-        navigate("/login");
+        navigate("/");
       } 
     }
 
@@ -66,7 +66,7 @@ export default function TopBar() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    navigate("/ ");
   };
 
   const toggleMenu = () => {

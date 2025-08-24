@@ -167,7 +167,7 @@ export default function Cadastro() {
         <FooterCadastro>
           <h1>Já tem uma conta?</h1>
           <ButtonCadastro
-            onClick={() => navigate("/Login")}
+            onClick={() => navigate("/")}
             style={{ cursor: "pointer" }}
           >
             <h2>Acessar</h2>
