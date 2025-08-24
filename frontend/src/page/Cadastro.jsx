@@ -42,6 +42,7 @@ export default function Cadastro() {
     formData.append("password", password);
     formData.append("confirmPassword", confirmPassword);
     formData.append("phone", phone);
+    console.log(image);
     if (image) formData.append("image", image);
 
     axios
@@ -70,8 +71,10 @@ export default function Cadastro() {
             <Title>Perfil</Title>
             <FileWrapper>
               <input 
+                id="file-upload" 
                 type="file"
                 onChange={(e) => setImage(e.target.files[0])}
+                style={{ display: 'none' }} 
               />
               <label htmlFor="file-upload" className="file-label">
                 <UploadIcon />
