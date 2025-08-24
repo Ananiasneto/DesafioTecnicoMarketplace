@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./page/Login";
 import Cadastro from "./page/Cadastro";
 import { createGlobalStyle } from "styled-components";
+import Home from "./page/Home";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/Login" element={<LoginPage />} />
         <Route path="/Cadastro" element={<Cadastro />} />
+        <Route path="/Home" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
