@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { createUser, findUserByEmail } from "../repository/userRepository.js";
+import { createUser, findUserByEmail, findUserById } from "../repository/userRepository.js";
 import { BadRequestError, ConflictError, NotFoundError, UnauthorizedError } from "../error/erros.js";
 
 export async function signInService({ email, password }) {
@@ -50,4 +50,11 @@ export async function signUpService({ email, password, name , phone , imageUrl }
       imageUrl:result.imageUrl
     }
   };
+}
+export async function getUserService(userId) {
+  const user = await findUserById(userId);
+  if (!user) {
+    throw new NotFoundError(" User not found");
+  }
+  return user;
 }

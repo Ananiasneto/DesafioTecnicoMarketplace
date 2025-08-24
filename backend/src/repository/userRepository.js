@@ -13,5 +13,12 @@ export async function createUser(userData) {
 export async function findUserById(id) {
     return await prisma.user.findUnique({
         where: { id },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            phone: true,
+            imageUrl: true
+        }
     });
 }
