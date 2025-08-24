@@ -3,7 +3,7 @@ import { getProductsService } from '../service/productService.js';
 
 export async function createProduct(req, res, next) {
     const { title, description, price, category } = req.body;
-    const imageUrl = req.file ? req.file.path : null;
+    const imageUrl = req.file ? req.file.filename : null;
     const userId = req.user.id;
     try {
         const product = await createProductService({ title, description, price, imageUrl, category , userId });

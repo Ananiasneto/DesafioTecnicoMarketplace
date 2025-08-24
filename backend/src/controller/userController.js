@@ -12,7 +12,7 @@ export async function signIn(req, res, next) {
 }
 export async function signUp(req, res, next) {
     const { name, email, password,phone} = req.body;
-    const imageUrl = req.file ? req.file.path : null;
+    const imageUrl = req.file ? req.file.filename : null;
     try {
         const user = await signUpService({ email, password, name, phone, imageUrl });
         return res.status(201).json(user);
