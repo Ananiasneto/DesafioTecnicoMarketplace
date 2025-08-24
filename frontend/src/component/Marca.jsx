@@ -16,9 +16,8 @@ export default function Marca() {
   );
 }
 const Styles = styled.div`
-  display: flex;
+    display: flex;
     flex-direction: column;
-    justify-content: space-around;
     font-family: Arial, sans-serif;
 `;
 const Container = styled.div`

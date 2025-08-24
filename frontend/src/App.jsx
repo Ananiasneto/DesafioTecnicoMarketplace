@@ -17,6 +17,7 @@ function App() {
 
 const GlobalStyle = createGlobalStyle`
   html, body, #root {
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #fbf4f4;
