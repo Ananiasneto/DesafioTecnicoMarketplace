@@ -1,6 +1,6 @@
 import { BadRequestError, NotFoundError, uniprocessableEntityError } from "../error/erros.js";
 import { checkCategoryExists, createCategory } from "../repository/categoryRepository.js";
-import { createProductRepository, getProductsByIdRepository, getProductsRepository, patchProductRepository, patchProductStatusRepository} from "../repository/productRepository.js";
+import { createProductRepository, getAllProductsRepository, getProductsByIdRepository, getProductsRepository, patchProductRepository, patchProductStatusRepository} from "../repository/productRepository.js";
 import { findUserById } from "../repository/userRepository.js";
 
 export async function createProductService({ title, description, price, imageUrl, category,userId }) {
@@ -31,8 +31,8 @@ export async function createProductService({ title, description, price, imageUrl
         title: result.title,
         description: result.description,
         price: result.price,
-        imageUrl: result.imageUrl
-        
+        imageUrl: result.imageUrl,
+        category: categoryExists.name
         },user: {
             id: user.id,
             name: user.name,
@@ -53,8 +53,14 @@ export async function getProductsService(category, status) {
         description: product.description,
         price: product.price,
         imageUrl: product.imageUrl,
-        status: product.status
+        status: product.status,
+        category: category
     }));
+}
+export async function getAllProductsService() {
+    const products = await getAllProductsRepository();
+    return products;
+
 }
 export async function getProductsByIdService(id) {
     const product = await getProductsByIdRepository(id);

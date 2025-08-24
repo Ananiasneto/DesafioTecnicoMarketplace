@@ -1,4 +1,4 @@
-import { createProductService, getProductsByIdService, patchProductService, patchProductStatusService } from '../service/productService.js';
+import { createProductService, getAllProductsService, getProductsByIdService, patchProductService, patchProductStatusService } from '../service/productService.js';
 import { getProductsService } from '../service/productService.js';
 
 export async function createProduct(req, res, next) {
@@ -17,6 +17,14 @@ export async function getProducts(req, res, next) {
     const { category ,status} = req.query;
     try {
         const products = await getProductsService( category, status );
+        return res.status(200).json(products);
+    } catch (error) {
+        next(error);
+    }
+}
+export async function getAllProducts(req, res, next) {
+    try {
+        const products = await getAllProductsService( );
         return res.status(200).json(products);
     } catch (error) {
         next(error);

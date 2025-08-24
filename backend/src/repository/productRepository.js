@@ -5,6 +5,18 @@ export async function createProductRepository(productData) {
         data: productData
     });
 }
+export async function getAllProductsRepository() {
+    return await prisma.product.findMany({
+        include: {
+            category: {
+                select: {
+                    id: true,
+                    name: true
+                }
+            }
+        }
+    });
+}
 export async function getProductsRepository(categoryName, status) {
   const productFilter = {};
 
