@@ -3,10 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Marca from "../component/Marca";
-import { FiEye, FiEyeOff } from "react-icons/fi";
-import { KeyIcon } from "../icons/KeyIcon";
-import { MailIcon } from "../icons/MailIcon";
-import {GoToIcon, GoToIconWhite} from "../icons/GoToIcon"
+import { AccessIcon, ArrowRight02Icon, Mail02Icon, ViewIcon, ViewOffIcon } from "hugeicons-react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -41,7 +38,7 @@ export default function LoginPage() {
           <SubTitle>E-mail</SubTitle>
           <form onSubmit={handleLogin}>
             <InputWrapper>
-              <MailIcon className="icon" />
+              <Mail02Icon className="icon"/>
               <input 
                 type="email" 
                 placeholder="Seu Email Cadastrado"
@@ -52,7 +49,7 @@ export default function LoginPage() {
             </InputWrapper>
           <SubTitle>Senha</SubTitle>
           <InputWrapper>
-              <KeyIcon className="icon" />
+              <AccessIcon className="icon" />
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Sua senha de acesso"
@@ -61,12 +58,12 @@ export default function LoginPage() {
                 required
               />
               <span className="toggle" onClick={() => setShowPassword(!showPassword)}>
-                {showPassword ? <FiEyeOff className="icon" size={20} /> : <FiEye className="icon" size={20} />}
+                {showPassword ? <ViewOffIcon className="icon" size={20}/> : <ViewIcon className="icon" size={20}/>}
               </span>
           </InputWrapper>
                 <ButtonSubmit type="submit">
                   Acessar
-                <GoToIconWhite/>
+                < ArrowRight02Icon/>
               </ButtonSubmit>
           </form>
         </Container>
@@ -76,7 +73,7 @@ export default function LoginPage() {
           <h2>
            Cadastrar
           </h2>
-          <GoToIcon/>
+          < ArrowRight02Icon/>
         </ButtonCadastro>
       </FooterCadastro>
       </Fomulario>  

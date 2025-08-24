@@ -2,14 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Marca from "../component/Marca";
-import { FiEye, FiEyeOff } from "react-icons/fi";
-import { KeyIcon } from "../icons/KeyIcon";
-import { MailIcon } from "../icons/MailIcon";
-import {GoToIcon, GoToIconWhite} from "../icons/GoToIcon"
 import styled from "styled-components";
-import { UploadIcon } from "../icons/UploadIcon";
-import { PhoneIcon } from "../icons/PhoneIcon";
-import { PersonIcon } from "../icons/PersonIcon";
+import { AccessIcon, ArrowRight02Icon, CallIcon, ImageUploadIcon, Mail02Icon, UserMultiple02Icon, ViewIcon, ViewOffIcon } from "hugeicons-react";
 
 export default function Cadastro() {
   const [name, setName] = useState("");
@@ -77,14 +71,14 @@ export default function Cadastro() {
                 style={{ display: 'none' }} 
               />
               <label htmlFor="file-upload" className="file-label">
-                <UploadIcon />
+                <ImageUploadIcon />
               </label>
             </FileWrapper>
 
             <SubTitle>Nome</SubTitle>
             
             <InputWrapper>
-            <PersonIcon />
+            <UserMultiple02Icon color="#888"/>
               <input
                 type="text"
                 placeholder="Seu nome Completo"
@@ -97,7 +91,7 @@ export default function Cadastro() {
             <SubTitle>Telefone</SubTitle>
            
             <InputWrapper> 
-            <PhoneIcon/>
+            <CallIcon color="#888" />
               <input
                 type="text"
                 placeholder="(00) 00000-0000"
@@ -109,7 +103,7 @@ export default function Cadastro() {
 
             <SubTitle>E-mail</SubTitle>
             <InputWrapper>
-              <MailIcon className="icon-left" />
+              <Mail02Icon color="#888" />
               <input
                 type="email"
                 placeholder="Seu E-mail de acesso"
@@ -121,7 +115,7 @@ export default function Cadastro() {
 
             <SubTitle>Senha</SubTitle>
             <InputWrapper>
-              <KeyIcon className="icon-left" />
+              <AccessIcon color="#888" />
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Sua senha de acesso"
@@ -134,16 +128,16 @@ export default function Cadastro() {
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
-                  <FiEyeOff className="icon-right" size={20} />
+                  <ViewOffIcon color="#888" size={20} />
                 ) : (
-                  <FiEye className="icon-right" size={20} />
+                  <ViewIcon color="#888" size={20} />
                 )}
               </span>
             </InputWrapper>
 
             <SubTitle>Confirme a Senha</SubTitle>
             <InputWrapper>
-            <KeyIcon className="icon-left" />
+            <AccessIcon  color="#888"/>
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirme a senha"
@@ -156,16 +150,16 @@ export default function Cadastro() {
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
                 {showConfirmPassword ? (
-                  <FiEyeOff className="icon-right" size={20} />
+                  <ViewOffIcon color="#888" size={20} />
                 ) : (
-                  <FiEye className="icon-right" size={20} />
+                  <ViewIcon color="#888" size={20} />
                 )}
               </span>
             </InputWrapper>
 
             <ButtonSubmit type="submit">
               Cadastrar
-              <GoToIconWhite />
+              <ArrowRight02Icon />
             </ButtonSubmit>
           </form>
         </Container>
@@ -177,7 +171,7 @@ export default function Cadastro() {
             style={{ cursor: "pointer" }}
           >
             <h2>Acessar</h2>
-            <GoToIcon />
+            <ArrowRight02Icon />
           </ButtonCadastro>
         </FooterCadastro>
       </Fomulario>
